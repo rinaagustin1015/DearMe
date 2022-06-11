@@ -24,14 +24,14 @@ if(tanggal!="" && judul!="" && isi!="" && kategori_id!=""){
 				$("#success").html('Diary Kamu Berhasil Ditambahkan! >.<'); 						
 			}
 			else if(dataResult.statusCode==201){
-				alert("Error occured !");
+				alert("Terjadi Kesalahan!");
 			}
 			
 		}
 	});
 	}
 	else{
-		alert('Please fill all the field !');
+		alert('Ups! Ada Kolom yang Masih Kosong');
 	}
 });
 });
