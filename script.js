@@ -1,6 +1,6 @@
 $(document).ready(function() {
 $('#submit').on('click', function() {
-$("#butsave").attr("disabled", "disabled");
+$("#submit").attr("disabled", "disabled");
 var judul = $('#judul').val();
 var kategori_id = $('#kategori_id').val();
 var tanggal = $('#tanggal').val();
@@ -22,7 +22,7 @@ if(tanggal!="" && judul!="" && isi!="" && kategori_id!=""){
 				$("#submit").removeAttr("disabled");
 				$('#fupForm').find('input:text').val('');
 				$("#success").show();
-				$("#success").html('Diary Kamu Berhasil Ditambahkan! >.<'); 						
+				$('#success').html('Diary Kamu Berhasil Ditambahkan! >.<');
 			}
 			else if(dataResult.statusCode==201){
 				alert("Terjadi Kesalahan!");
