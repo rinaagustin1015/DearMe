@@ -56,7 +56,7 @@
                     </select>
                 </div>
             </div>            
-            <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <div class="my-3 p-3 bg-body rounded shadow-sm" id="diary">
             <h6 class="border-bottom pb-2 mb-0">Catatan Tersimpan</h6>
 
             <?php
