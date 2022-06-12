@@ -71,11 +71,11 @@
                 <div class="d-flex text-muted pt-3">
                 <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
             
-                    <p class="pb-3 text-dark small lh-sm border-bottom">
-                    <strong class="d-block text-gray-dark"><?= $row['tanggal']?></strong>
-                    <?= $row['judul']?>         
-                    </p>                
-                </div>
+                    <p class="pb-3 text-dark small lh-sm border-bottom">                        
+                        <strong class="d-block text-gray-dark"><?= $row['tanggal']?></strong>                        
+                        <a href="diaryEdit.php?id=<?= $row['id_judul']?>" style="text-decoration:none; color:black;"><?= $row['judul']?></a>                                                         
+                    </p>                                    
+                </div>                
                 <?php endwhile ; ?>
 
             <nav aria-label="Page navigation example">
@@ -96,26 +96,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="offcanvas.js"></script>
-    <script>
-        $(document).on('click','#btn-add',function(e) {
-		var data = $("#user_form").serialize();
-		$.ajax({
-			data: data,
-			type: "post",
-			url: "backend/save.php",
-			success: function(dataResult){
-					var dataResult = JSON.parse(dataResult);
-					if(dataResult.statusCode==200){
-						$('#addEmployeeModal').modal('hide');
-						alert('Data added successfully !'); 
-                        location.reload();						
-					}
-					else if(dataResult.statusCode==201){
-					   alert(dataResult);
-					}
-			}
-		});
-	});
-    </script>
+    <script></script>
   </body>
 </html>

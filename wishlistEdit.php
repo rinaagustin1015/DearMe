@@ -39,14 +39,25 @@
                 <a class="blog-header-logo text-white fs-3" style="text-decoration: none;">My Wish List</a>
             </div>
             <div class="mb-5">
+            <?php  
+                include "config.php";
+                $id = $_GET['id'];
+                $query = "SELECT * FROM wish_list where id = $id;";
+                $sql = $db->query($query);
+                $data = [];
+
+                while ($row = $sql->fetch_assoc()):
+                ?>
                 <form id="form" name="form" method="POST">                    
                     <div class="form-group row g-3 mt-2">
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="nama_item" name="nama_item" placeholder="Apa yang kamu inginkan ?" required="required">   
+                            <input type="text" class="form-control" id="nama_item" name="nama_item" value="<?= $row['nama_item']?>" placeholder="Apa yang kamu inginkan ?" required="required">
+                            <input type="hidden" id="id_update" name="id_update" value="<?= $row['id']?>">   
                         </div>
                         <div class="col-sm-2">
                             <select class="form-select" id="kategori" name="kategori" for="kategori">
-                                <option selected>Belum</option>
+                                <option selected><?= $row['status']?></option>
+                                <option>Belum</option>
                                 <option>Terpenuhi</option>
                             </select>
                         </div>
@@ -58,20 +69,20 @@
                     </div>                    
                     <div class="form-group row mt-3">
                         <div class="col-sm-12">
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3" placeholder="Catatan" rows="3"></textarea>
+                            <textarea class="form-control" id="catatan" name="catatan" rows="3" placeholder="Catatan" rows="3"><?= $row['catatan']?></textarea>
                         </div>
                     </div>
                     <div class="form-group row g-3 mt-3">
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-text">Harga</span>
-                                <input type="number" step="500" name="harga" class="form-control" id="harga" value="" placeholder="Berapa Sih ?">
+                                <input type="number" step="500" name="harga" class="form-control" id="harga" value="<?= $row['harga']?>" placeholder="Berapa Sih ?">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-text">Jumlah</span>
-                                <input type="number" step="1" name="jumlah" class="form-control" id="jumlah" value="" placeholder="Mau Berapa ?">
+                                <input type="number" step="1" name="jumlah" class="form-control" id="jumlah" value="<?= $row['jumlah']?>" placeholder="Mau Berapa ?">
                             </div>
                         </div>
                         <div class="text-end mb-5">
@@ -79,7 +90,8 @@
                             <button class="btn btn-create bi bi-send-plus-fill text-dark mt-4" style="background-color:white; margin-right: 11%;" type="submit" id="submit"> Simpan</button>
                         </div>
                     </div>
-                </form>                
+                </form>
+                <?php endwhile ; ?>                
             </div>
         </div>
     </main>
@@ -90,6 +102,7 @@
         $(document).ready(function() {
         $('#submit').on('click', function() {
         $("#butsave").attr("disabled", "disabled");
+        var id_update = $('#id_update').val();
         var nama_item = $('#nama_item').val();
         var kategori = $('#kategori').val();
         var img = $('#img').val();
@@ -98,9 +111,10 @@
         var catatan = $('#catatan').val();
         if(nama_item!="" && kategori!="" && catatan!=""){
             $.ajax({
-                url: "simpanDiary.php?action=simpanWishlist",
+                url: "wishlistEdit.php?action=updateWishlist",
                 type: "POST",
                 data: {
+                    id_update : id_update,
                     harga: harga,
                     nama_item: nama_item,
                     catatan: catatan,

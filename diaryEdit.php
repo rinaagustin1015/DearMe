@@ -13,6 +13,15 @@
   </head>
 
   <body>
+    <?php  
+      include "config.php";
+      $id = $_GET['id'];
+      $query = "SELECT * FROM diary JOIN kategori ON diary.kategori_id = kategori.id where diary.id_judul = $id;";
+      $sql = $db->query($query);
+      $data = [];
+
+      while ($row = $sql->fetch_assoc()):
+      ?>
     <header class="py-2">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#598392;">
             <div class="container-fluid px-4">
@@ -50,35 +59,36 @@
                   </div>
                       <label class="col-sm-1 col-form-label" for="judul"></label>
                       <div class="col-sm-5">
-                          <input type="text" class="form-control" id="judul" placeholder="Judul" name="judul" required>
-                      </div>             
+                          <input type="text" class="form-control" id="judul" placeholder="Judul" name="judul" value="<?= $row['judul']?>" required>
+                          <input type="hidden" id="id_update" name="id_update" value="<?= $row['id_judul']?>">
+                        </div>             
                   <div class="col-md-2">
                       <select class="form-select" id="kategori_id" name="kategori_id" for="kategori_id">
-                          <option value="" selected>Mood</option>
+                          <option value="<?= $row['kategori_id']?>" selected><?= $row['kategori']?></option>
                       </select>
                   </div>
                   <div class="col-md-2">
-                      <input type="date" class="date form-control text-light" name="tanggal" id="tanggal" value="" style="color: dark;">
+                      <input type="date" class="date form-control text-light" name="tanggal" id="tanggal" value="<?= $row['tanggal']?>" style="color: dark;">
                   </div>
                   <div class="form-group row mt-3">
                       <label class="col-sm-1 mt-3 col-form-label" for="isi"></label>
                       <div class="col-sm-10">
-                          <textarea class="form-control" id="isi" name="isi" cols="100" rows="20" placeholder="Tulis disini..."></textarea>
+                          <textarea class="form-control" id="isi" name="isi" cols="100" rows="20" value="<?= $row['isi']?>" placeholder="Tulis disini..."><?= $row['isi']?></textarea>
                       </div>
                   </div>
                   <div class="text-end my-auto mb-5">                        
-                      <a class="btn btn-danger bi bi-x-square-fill px-3 mt-4" href="./diary.php"> Batal</a>
+                      <a class="btn btn-danger bi bi-x-square-fill px-3 mt-4" href="./diary.php"> Kembali</a>
+                      <a class="btn btn-danger bi bi-trash-fill px-3 mt-4" href=""> Hapus</a>
                       <button class="btn btn-create bi bi-send-plus-fill px-3 mt-4" style="margin-right: 11%;" type="submit" id="submit"> Simpan</button>
                   </div>
               </div>                      
-          </form>            
+          </form> 
+                               
       </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-    <script src="script.js"></script>
     <script>
       $(document).ready(function () { 
           $.get("kategori.php?action=kategori", function (respon){
@@ -87,6 +97,48 @@
               });
           });
       });
+
+      $(document).ready(function() {
+      $('#submit').on('click', function() {
+      $("#butsave").attr("disabled", "disabled");
+      var id_update = $('#id_update').val();
+      var judul = $('#judul').val();
+      var kategori_id = $('#kategori_id').val();
+      var tanggal = $('#tanggal').val();
+      var isi = $('#isi').val();
+      if(tanggal!="" && judul!="" && isi!="" && kategori_id!=""){
+        $.ajax({
+          url: "updateDiary.php?action=updateDiary",
+          type: "POST",
+          data: {
+                id_update : id_update,
+                tanggal: tanggal,
+                judul: judul,
+                isi: isi,
+                kategori_id: kategori_id				
+          },
+          cache: false,
+          success: function(dataResult){
+            var dataResult = JSON.parse(dataResult);
+            if(dataResult.statusCode==200){
+              $("#submit").removeAttr("disabled");
+              $('#fupForm').find('input:text').val('');
+              $("#success").show();
+              $("#success").html('Diary Kamu Berhasil Ditambahkan! >.<'); 						
+            }
+            else if(dataResult.statusCode==201){
+              alert("Terjadi Kesalahan!");
+            }
+            
+          }
+        });
+        }
+        else{
+          alert('Ups! Ada Kolom yang Masih Kosong');
+        }
+      });
+      });
     </script>
+    <?php endwhile ; ?>
   </body>
 </html>

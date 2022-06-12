@@ -7,7 +7,7 @@ var tanggal = $('#tanggal').val();
 var isi = $('#isi').val();
 if(tanggal!="" && judul!="" && isi!="" && kategori_id!=""){
 	$.ajax({
-		url: "simpanDiary.php",
+		url: "simpanDiary.php?action=simpanDiary",
 		type: "POST",
 		data: {
 			tanggal: tanggal,

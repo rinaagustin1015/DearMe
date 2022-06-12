@@ -62,7 +62,8 @@
               <img src="<?= $row['img']?>" class="card-img-top" alt="foto keinginanmu">
               <div class="card-body" style="background-color:#598392">
                 <p class="card-text"></p>
-                <a href="" class="btn btn-light">Kelola</a>
+                <a href="wishlistEdit.php?id=<?= $row['id']?>" class="btn btn-light">Kelola</a>
+                <a href=""><i class="bi bi-trash-fill" style="color: red; float: right;"></i></a>
               </div>
             </div>
           </div>

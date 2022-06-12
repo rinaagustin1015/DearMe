@@ -86,7 +86,8 @@
                             <?= $row['status']?>
                         </td>
                         <td>
-                            <i class="bi bi-pencil-square" style="color: blue;"></i>
+                            <a href="todolistEdit.php?id=<?= $row['id']?>"><i class="bi bi-pencil-square" style="color: blue;"></i></a>                            
+                            <a href=""><i class="bi bi-trash-fill" style="color: red"></i></a>
                         </td>
                       </tr>
                     </tbody>
