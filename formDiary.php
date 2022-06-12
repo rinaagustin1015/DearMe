@@ -36,9 +36,12 @@
     </header>
 
     <main class="px-3 py-5">
-      <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+      <div class="py-2">
+        <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+          <a href="diary.php" class="close" data-dismiss="alert" aria-label="close">x</a>
+        </div>
       </div>
+     
       
       <div class="container mt-5 mb-4 shadow-lg rounded" style="background-image: url('asset/bg-diary.png'); background-size: 100% 100%;">
           <form id="form" name="form" method="POST">
