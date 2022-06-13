@@ -34,9 +34,9 @@
     </header>
 
     <main class="px-3 py-5">
-        <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+        <!-- <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-        </div>
+        </div> -->
 
         <div class="container mt-5 mb-4 shadow-lg rounded" style="background-color: #598392;">
             <div class="col-3">
@@ -116,7 +116,9 @@
                         $("#submit").removeAttr("disabled");
                         $('#fupForm').find('input:text').val('');
                         $("#success").show();
-                        $("#success").html('TODO Kamu Berhasil Ditambahkan! >.<'); 						
+                        $("#success").html('TODO Kamu Berhasil Ditambahkan! >.<'); 	
+                        // alert("TODO Kamu Berhasil Diedit! >.<")		
+                        // window.location : "todolist.php"			
                     }
                     else if(dataResult.statusCode==201){
                         alert("Terjadi Kesalahan!");

@@ -27,7 +27,7 @@
                     <li class="nav-item"><a class="nav-link" href="index.html" style="font-size: medium; color: white;">Keluar</a></li>
                     </ul>
                     <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Cari...">
+                    <input class="form-control me-2" type="search" id="ngetik" placeholder="Cari...">
                     </form>
                 </div>
                 </div>
@@ -48,17 +48,15 @@
 
             <div class="d-flex align-items-center p-3 my-3 text-dark rounded shadow-sm">
                 <div class="d-flex align-items-center">                
-                    <select class="form-select" aria-label="">
-                        <option selected>Pilih Kategori</option>
-                        <option value="1">Bahagia</option>
-                        <option value="2">Marah</option>
-                        <option value="3">Sedih</option>
+                    <select class="form-select" id="kategori_id" name="kategori_id" for="kategori_id">
+                          <option value="" selected>Pilih Mood</option>
                     </select>
                 </div>
             </div>            
             <div class="my-3 p-3 bg-body rounded shadow-sm" id="diary">
             <h6 class="border-bottom pb-2 mb-0">Catatan Tersimpan</h6>
 
+            <div class="" id = "data" name="data">
             <?php
                 include "config.php";
                 $query = "SELECT * FROM diary ORDER BY tanggal DESC;";
@@ -67,16 +65,15 @@
         
                 while ($row = $sql->fetch_assoc()):
                 ?>
-
                 <div class="d-flex text-muted pt-3">
-                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-            
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>            
                     <p class="pb-3 text-dark small lh-sm border-bottom">                        
                         <strong class="d-block text-gray-dark"><?= $row['tanggal']?></strong>                        
                         <a href="diaryEdit.php?id=<?= $row['id_judul']?>" style="text-decoration:none; color:black;"><?= $row['judul']?></a>                                                         
                     </p>                                    
-                </div>                
+                </div>                                
                 <?php endwhile ; ?>
+            </div>
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center mt-3">
@@ -93,9 +90,33 @@
             </nav>
         </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="offcanvas.js"></script>
-    <script></script>
+    <script>
+        $(document).ready(function () {
+            $.get("kategori.php?action=kategori", function (respon) {
+                $.each(respon, function (key, value) {
+                    $("#kategori_id").append("<option value='" + value.id + "'>" + value.kategori + "</option>")
+                });
+            });
+        });
+
+        var ngetik = document.getElementById("ngetik");
+        var data = document.getElementById("data");
+
+        ngetik.addEventListener("keyup", function () {
+        var ObjAjax = new XMLHttpRequest();
+
+        ObjAjax.onreadystatechange = function () {
+            if (ObjAjax.readyState == 4 && ObjAjax.status == 200) {
+            data.innerHTML = ObjAjax.responseText;
+            }
+        };
+
+        ObjAjax.open("get", "./searchDiary.php?ngetik=" + ngetik.value, true);
+        ObjAjax.send();
+        });        
+    </script>
   </body>
 </html>

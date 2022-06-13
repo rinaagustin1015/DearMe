@@ -51,11 +51,11 @@
                 <form id="form" name="form" method="POST">                    
                     <div class="form-group row g-3 mt-2">
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="nama_item" name="nama_item" value="<?= $row['nama_item']?>" placeholder="Apa yang kamu inginkan ?" required="required">
-                            <input type="hidden" id="id_update" name="id_update" value="<?= $row['id']?>">   
+                            <input type="text" class="form-control" id="nama_item" name="nama_item" for="nama_item" value="<?= $row['nama_item']?>" placeholder="Apa yang kamu inginkan ?" required="required">
+                            <input type="hidden" id="id_update" name="id_update" for="id_update" value="<?= $row['id']?>">   
                         </div>
                         <div class="col-sm-2">
-                            <select class="form-select" id="kategori" name="kategori" for="kategori">
+                            <select class="form-select" id="status" name="status" for="status">
                                 <option selected><?= $row['status']?></option>
                                 <option>Belum</option>
                                 <option>Terpenuhi</option>
@@ -64,25 +64,28 @@
                     </div>
                     <div class="form-group row mt-3">
                         <div class="col-sm-12">
-                            <input type="file" accept="image/*" class="form-control" id="img" name="img" for="img">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+                                <input type="text" class="form-control" id="link_item" name="link_item" for="link_item" value="<?= $row['link_item']?>" placeholder="Link barang yang kamu inginkan" required="required">
+                            </div>
                         </div>
                     </div>                    
                     <div class="form-group row mt-3">
                         <div class="col-sm-12">
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3" placeholder="Catatan" rows="3"><?= $row['catatan']?></textarea>
+                            <textarea class="form-control" id="catatan" name="catatan" for="catatan" rows="3" placeholder="Catatan" rows="3"><?= $row['catatan']?></textarea>
                         </div>
                     </div>
                     <div class="form-group row g-3 mt-3">
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-text">Harga</span>
-                                <input type="number" step="500" name="harga" class="form-control" id="harga" value="<?= $row['harga']?>" placeholder="Berapa Sih ?">
+                                <input class="form-control" type="number" step="500" name="harga" id="harga" for="harga" value="<?= $row['harga']?>" placeholder="Berapa Sih ?">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-text">Jumlah</span>
-                                <input type="number" step="1" name="jumlah" class="form-control" id="jumlah" value="<?= $row['jumlah']?>" placeholder="Mau Berapa ?">
+                                <input class="form-control" type="number" step="1" name="jumlah" id="jumlah" for="jumlah" value="<?= $row['jumlah']?>" placeholder="Mau Berapa ?">
                             </div>
                         </div>
                         <div class="text-end mb-5">
@@ -96,7 +99,7 @@
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
@@ -104,22 +107,22 @@
         $("#butsave").attr("disabled", "disabled");
         var id_update = $('#id_update').val();
         var nama_item = $('#nama_item').val();
-        var kategori = $('#kategori').val();
-        var img = $('#img').val();
+        var status = $('#kategori').val();
+        var link_item = $('#link_item').val();
+        var catatan = $('#catatan').val();
         var harga = $('#harga').val();
         var jumlah = $('#jumlah').val();
-        var catatan = $('#catatan').val();
-        if(nama_item!="" && kategori!="" && catatan!=""){
+        if(nama_item!="" && status!="" && catatan!=""){
             $.ajax({
                 url: "wishlistEdit.php?action=updateWishlist",
                 type: "POST",
                 data: {
                     id_update : id_update,
-                    harga: harga,
                     nama_item: nama_item,
+                    status: status,
+                    link_item: link_item,
                     catatan: catatan,
-                    kategori: kategori,
-                    img: img,
+                    harga: harga,
                     jumlah: jumlah				
                 },
                 cache: false,
@@ -129,7 +132,7 @@
                         $("#submit").removeAttr("disabled");
                         $('#fupForm').find('input:text').val('');
                         $("#success").show();
-                        $("#success").html('TODO Kamu Berhasil Ditambahkan! >.<'); 						
+                        $("#success").html('TODO Kamu Berhasil Diedit! >.<'); 						
                     }
                     else if(dataResult.statusCode==201){
                         alert("Terjadi Kesalahan!");

@@ -28,7 +28,7 @@
                   <li class="nav-item"><a class="nav-link" href="index.html" style="font-size: medium; color: white;">Keluar</a></li>
                 </ul>
                 <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Cari...">
+                  <input class="form-control me-2" type="search" id="search" placeholder="Cari...">
                 </form>
               </div>
             </div>
@@ -36,11 +36,11 @@
     </header>
 
     <main class="px-3 py-5">
-      <div class="py-2">
+      <!-- <div class="py-2">
         <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
           <a href="diary.php" class="close" data-dismiss="alert" aria-label="close">x</a>
         </div>
-      </div>
+      </div> -->
      
       
       <div class="container mt-5 mb-4 shadow-lg rounded" style="background-image: url('asset/bg-diary.png'); background-size: 100% 100%;">

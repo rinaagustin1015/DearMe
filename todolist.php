@@ -27,7 +27,7 @@
                         <li class="nav-item"><a class="nav-link" href="index.html" style="font-size: medium; color: white;">Keluar</a></li>
                         </ul>
                         <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Cari...">
+                        <input class="form-control me-2" type="search" id="ngetik" placeholder="Cari...">
                         </form>
                     </div>
                     </div>
@@ -63,7 +63,8 @@
                         <th scope="col"></th>
                       </tr>
                     </thead>
-
+                    
+                    <tbody id="data" name="data">
                     <?php
                     include "config.php";
                     $query = "SELECT * FROM to_do_list ORDER BY tanggal ASC;";
@@ -71,9 +72,7 @@
                     $data = [];
             
                     while ($row = $sql->fetch_assoc()):
-                    ?>
-
-                    <tbody>
+                    ?>                    
                       <tr>
                         <th scope="row"><?= $row['tanggal']?></th>
                         <td>
@@ -86,19 +85,38 @@
                             <?= $row['status']?>
                         </td>
                         <td>
-                            <a href="todolistEdit.php?id=<?= $row['id']?>"><i class="bi bi-pencil-square" style="color: blue;"></i></a>                            
-                            <a href=""><i class="bi bi-trash-fill" style="color: red"></i></a>
+                            <a href="todolistEdit.php?id=<?= $row['id']?>"><i class="bi bi-pencil-square" style="color: blue;"></i></a>
+                            <a href="delete.php?action=deleteTodolist&id=<?= $row['id']?>"><i class="bi bi-trash-fill" style="color: red"></i></a>   
+                            <input type="hidden" id="id_delete" name="id_delete" for="id_delete" value="<?= $row['id']?>">
                         </td>
                       </tr>
+                    <?php endwhile ; ?>
                     </tbody>
-                    <?php endwhile ; ?>                      
+                                          
                 </table>
             </div>            
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script>
+        var ngetik = document.getElementById("ngetik");
+        var data = document.getElementById("data");
+
+        ngetik.addEventListener("keyup", function () {
+        var ObjAjax = new XMLHttpRequest();
+
+        ObjAjax.onreadystatechange = function () {
+            if (ObjAjax.readyState == 4 && ObjAjax.status == 200) {
+            data.innerHTML = ObjAjax.responseText;
+            }
+        };
+
+        ObjAjax.open("get", "./searchTodolist.php?ngetik=" + ngetik.value, true);
+        ObjAjax.send();
+        });
+    </script>
 
 </body>
 </html>

@@ -37,13 +37,13 @@
 
 		case 'simpanWishlist':
 			$nama_item =$_POST['nama_item'];
-			$kategori =$_POST['kategori'];
-			$img =$_POST['img'];
+			$status =$_POST['status'];
+			$link_item =$_POST['link_item'];
+			$catatan =$_POST['catatan'];
 			$harga =$_POST['harga'];
 			$jumlah =$_POST['jumlah'];
-			$catatan =$_POST['catatan'];
-			$sql = "INSERT INTO `wish_list`( `nama_item`, `img`, `catatan`, `harga`, `jumlah`, `status`) 
-			VALUES ('$nama_item','$img','$catatan','$harga', '$jumlah', '$kategori')";
+			$sql = "INSERT INTO wish_list( `nama_item`, `link_item`, `catatan`, `harga`, `jumlah`, `status`) 
+			VALUES ('$nama_item','$link_item','$catatan','$harga', '$jumlah', '$status');";
 			if (mysqli_query($db, $sql)) {
 				echo json_encode(array("statusCode"=>200));
 			} 

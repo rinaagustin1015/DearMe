@@ -26,7 +26,7 @@
               <li class="nav-item"><a class="nav-link" href="index.html" style="font-size: medium; color: white;">Keluar</a></li>
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Cari...">
+              <input class="form-control me-2" type="search" id="ngetik" name="ngetik" placeholder="Cari...">
             </form>
           </div>
         </div>
@@ -47,7 +47,7 @@
 
     <div>        
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-5" id="data" name="data">
           <?php
               include "config.php";
               $query = "SELECT * FROM wish_list";
@@ -59,11 +59,12 @@
           <div class="col">
             <div class="card" style="width: 18rem;">
               <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?= $row['status']?></div>
-              <img src="<?= $row['img']?>" class="card-img-top" alt="foto keinginanmu">
               <div class="card-body" style="background-color:#598392">
-                <p class="card-text"></p>
-                <a href="wishlistEdit.php?id=<?= $row['id']?>" class="btn btn-light">Kelola</a>
-                <a href=""><i class="bi bi-trash-fill" style="color: red; float: right;"></i></a>
+                <p class="pt-3 card-text fw-bolder"><?= $row['nama_item']?></p>
+                <p class="text-light">Rp. <?= $row['harga']?></p>
+                <a href="wishlistEdit.php?id=<?= $row['id']?>" class="btn btn-light">Kelola</a>                
+                <a href="delete.php?action=deleteWishlist&id=<?= $row['id']?>"><i class="bi bi-trash-fill" style="color: red; float: right;"></i></a>                
+                <a href="<?= $row['link_item']?>" target="_blank"><i class="bi bi-link-45deg px-3" style="color: white; float: right;"></i></a>
               </div>
             </div>
           </div>
@@ -72,8 +73,25 @@
     </div>      
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <script>
+    var ngetik = document.getElementById("ngetik");
+    var data = document.getElementById("data");
+
+    ngetik.addEventListener("keyup", function () {
+    var ObjAjax = new XMLHttpRequest();
+
+    ObjAjax.onreadystatechange = function () {
+        if (ObjAjax.readyState == 4 && ObjAjax.status == 200) {
+        data.innerHTML = ObjAjax.responseText;
+        }
+    };
+
+    ObjAjax.open("get", "./searchWishlist.php?ngetik=" + ngetik.value, true);
+    ObjAjax.send();
+    });
+  </script>
 
 </body>
 </html>

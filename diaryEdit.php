@@ -78,7 +78,7 @@
                   </div>
                   <div class="text-end my-auto mb-5">                        
                       <a class="btn btn-danger bi bi-x-square-fill px-3 mt-4" href="./diary.php"> Kembali</a>
-                      <a class="btn btn-danger bi bi-trash-fill px-3 mt-4" href=""> Hapus</a>
+                      <button class="btn btn-danger bi bi-trash-fill px-3 mt-4" id="delete" name="delete" for=""> Hapus</button>
                       <button class="btn btn-create bi bi-send-plus-fill px-3 mt-4" style="margin-right: 11%;" type="submit" id="submit"> Simpan</button>
                   </div>
               </div>                      
@@ -121,10 +121,12 @@
           success: function(dataResult){
             var dataResult = JSON.parse(dataResult);
             if(dataResult.statusCode==200){
-              $("#submit").removeAttr("disabled");
-              $('#fupForm').find('input:text').val('');
-              $("#success").show();
-              $("#success").html('Diary Kamu Berhasil Ditambahkan! >.<'); 						
+              // $("#submit").removeAttr("disabled");
+              // $('#fupForm').find('input:text').val('');
+              // $("#success").show();
+              // $("#success").html('Diary Kamu Berhasil Diedit! >.<');
+              alert("Diary Kamu Berhasil Diedit! >.<") 	
+              window.location = "diary.php"						
             }
             else if(dataResult.statusCode==201){
               alert("Terjadi Kesalahan!");
@@ -137,6 +139,35 @@
           alert('Ups! Ada Kolom yang Masih Kosong');
         }
       });
+      });
+
+      $(document).ready(function() {
+      $('#delete').on('click', function() { 
+        var id_update = $('#id_update').val();
+        $.ajax({
+          url: "delete.php?action=deleteDiary",
+          type: "POST",
+          cache: false,
+          data:{
+            id_update : id_update,
+          },
+          success: function(dataResult){
+            var dataResult = JSON.parse(dataResult);
+            if(dataResult.statusCode==200){
+              // $("#submit").removeAttr("disabled");
+              // $('#fupForm').find('input:text').val('');
+              // $("#success").show('');
+              // $("#success").html('Diary Kamu Berhasil Dihapus! >.<');
+              alert("Diary Kamu Berhasil Dihapus! >.<")
+              window.location = "diary.php"		
+              	
+            }
+            else if(dataResult.statusCode==201){
+              alert("Terjadi Kesalahan!");
+            }
+          } 
+          });
+        });
       });
     </script>
     <?php endwhile ; ?>

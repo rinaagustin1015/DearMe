@@ -19,10 +19,13 @@ if(tanggal!="" && judul!="" && isi!="" && kategori_id!=""){
 		success: function(dataResult){
 			var dataResult = JSON.parse(dataResult);
 			if(dataResult.statusCode==200){
-				$("#submit").removeAttr("disabled");
-				$('#fupForm').find('input:text').val('');
-				$("#success").show();
-				$('#success').html('Diary Kamu Berhasil Ditambahkan! >.<');
+				// $("#submit").removeAttr("disabled");
+				// $('#fupForm').find('input:text').val('');
+				// $("#success").show();
+				// $('#success').html('Diary Kamu Berhasil Ditambahkan! >.<');
+				alert("Diary Kamu Berhasil Ditambahkan! >.<")
+				window.location = "diary.php"
+						
 			}
 			else if(dataResult.statusCode==201){
 				alert("Terjadi Kesalahan!");

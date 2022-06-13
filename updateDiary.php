@@ -25,20 +25,23 @@
 		case 'updateWishlist':
             $id_update=$_POST['id_update'];
 			$nama_item =$_POST['nama_item'];
-			$kategori =$_POST['kategori'];
-			$img =$_POST['img'];
+			$status =$_POST['status'];
+			$link_item =$_POST['link_item'];
 			$harga =$_POST['harga'];
 			$jumlah =$_POST['jumlah'];
 			$catatan =$_POST['catatan'];
-			$sql = "UPDATE `wish_list` SET 
-            `nama_item`='$nama_item',
-            `img`='$img',
-            `catatan`='[value-4]',
-            `harga`='$harga',
-            `jumlah`='$jumlah',
-            `status`='$kategori' WHERE id='$id_update'";
+			$sql = "UPDATE wish_list SET 
+            nama_item='$nama_item',
+            link_item='$link_item',
+            catatan='$catatan',
+            harga='$harga',
+            jumlah='$jumlah',
+            status='$status' WHERE id='$id_update'";
 			if (mysqli_query($db, $sql)) {
-				echo json_encode(array("statusCode"=>200));
+				echo ("<script LANGUAGE='JavaScript'>
+                        window.alert('WISHLIST kamu berhasil diedit >.<');
+                        window.location.href='wishlist.php';
+                        </script>");
 			} 
 			else {
 				echo json_encode(array("statusCode"=>201));
@@ -52,8 +55,8 @@
 			$to_do =$_POST['to_do'];
 			$catatan=$_POST['catatan'];
 			$kategori=$_POST['kategori'];
-			$sql = "UPDATE `to_do_list` SET `to_do`='$to_do',
-            `tanggal`='$tanggal',`catatan`='$catatan',`status`='$kategori' WHERE id='$id_update'";
+			$sql = "UPDATE to_do_list SET to_do='$to_do',
+            tanggal ='$tanggal',catatan='$catatan',status ='$kategori' WHERE id='$id_update'";
 			if (mysqli_query($db, $sql)) {
 				echo json_encode(array("statusCode"=>200));
 			} 
