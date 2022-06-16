@@ -34,7 +34,7 @@
     </header>
 
     <main class="px-3 py-5">
-        <div class="container mt-5 mb-4 shadow-lg rounded" style="background-color: #598392;">
+        <div class="container mt-5 mb-4 shadow shadow-lg rounded" style="background-color: #598392;">
             <div class="col-3">
                 <a class="blog-header-logo text-white fs-3" style="text-decoration: none;">My Wish List</a>
             </div>
@@ -90,6 +90,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script>
+        // ADD WISHLIST
         $(document).ready(function() {
         $("#submit").on('click', function() {
         $("#butsave").attr("disabled", "disabled");
@@ -115,10 +116,8 @@
                 success: function(dataResult){
                     var dataResult = JSON.parse(dataResult);
                     if(dataResult.statusCode==200){
-                        $("#submit").removeAttr("disabled");
-                        $('#fupForm').find('input:text').val('');
-                        $("#success").show();
-                        $('#success').html('Diary Kamu Berhasil Ditambahkan! >.<');
+                        alert("WISHLIST Kamu Berhasil Ditambahkan! >.<")	
+                        window.location = "wishlist.php"
                                 
                     }
                     else if(dataResult.statusCode==201){

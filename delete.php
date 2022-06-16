@@ -18,11 +18,7 @@
 		case 'deleteWishlist':
             $id=$_GET['id'];
             $sql = "DELETE FROM wish_list WHERE id=$id";
-            if (mysqli_query($db, $sql)) {              
-                // header("location:todolist.php");  
-                // echo '<script type ="text/JavaScript">';  
-                // echo 'alert("Data Berhasil dihapus")';
-                // echo '</script>';
+            if (mysqli_query($db, $sql)) {     
                 echo ("<script LANGUAGE='JavaScript'>
                         window.alert('WISHLIST kamu berhasil dihapus >.<');
                         window.location.href='wishlist.php';
@@ -37,11 +33,7 @@
 		case 'deleteTodolist':
             $id=$_GET['id'];
             $sql = "DELETE FROM to_do_list WHERE id=$id";
-            if (mysqli_query($db, $sql)) {              
-                // header("location:todolist.php");  
-                // echo '<script type ="text/JavaScript">';  
-                // echo 'alert("Data Berhasil dihapus")';
-                // echo '</script>';
+            if (mysqli_query($db, $sql)) {     
                 echo ("<script LANGUAGE='JavaScript'>
                         window.alert('TODO kamu berhasil dihapus >.<');
                         window.location.href='todolist.php';

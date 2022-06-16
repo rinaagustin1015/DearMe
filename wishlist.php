@@ -40,7 +40,7 @@
                 <h1 class="h6 mb-0 text-dark">Apa keinginanmu hari ini?</h1>
             </div>
             <div class="col-auto">
-                <a class="btn btn-secondary me-md-3" href="formWishlist.php" style="background-color: #598392;"><span><i class="bi bi-bookmark-plus-fill text-light"></i></span> Tambahkan</a>
+                <a class="btn btn-secondary me-md-3 shadow" href="formWishlist.php" style="background-color: #598392;"><span><i class="bi bi-bookmark-plus-fill text-light"></i></span> Tambahkan</a>
             </div>
       </div>      
     </div>
@@ -85,6 +85,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script>
+    // SEARCHING
     var ngetik = document.getElementById("ngetik");
     var data = document.getElementById("data");
 
@@ -101,6 +102,7 @@
     ObjAjax.send();
     });
 
+    // SORTING BY KATEGORI
     var kategori = document.getElementById("kategori");
     var data = document.getElementById("data");
 

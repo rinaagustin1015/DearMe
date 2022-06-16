@@ -17,5 +17,4 @@
             <a href="diaryEdit.php?id=<?= $row['id_judul']?>" style="text-decoration:none; color:black;"><?= $row['judul']?></a>                                                         
         </p>                                                
     </div>
-    <?php endwhile ; ?>
-        
+    <?php endwhile ; ?>        

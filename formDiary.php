@@ -35,15 +35,9 @@
         </nav>
     </header>
 
-    <main class="px-3 py-5">
-      <!-- <div class="py-2">
-        <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-          <a href="diary.php" class="close" data-dismiss="alert" aria-label="close">x</a>
-        </div>
-      </div> -->
-     
+    <main class="px-3 py-5">   
       
-      <div class="container mt-5 mb-4 shadow-lg rounded" style="background-image: url('asset/bg-diary.png'); background-size: 100% 100%;">
+      <div class="container mt-5 mb-4 shadow shadow-lg rounded" style="background-image: url('asset/bg-diary.png'); background-size: 100% 100%;">
           <form id="form" name="form" method="POST">
               <div class="form-group row g-3 mt-3">
                   <div style="margin-top: 7%;">
@@ -83,6 +77,7 @@
 
     <script src="script.js"></script>
     <script>
+      // MENGAMBIL KATEGORI
       $(document).ready(function () { 
           $.get("kategori.php?action=kategori", function (respon){
               $.each(respon, function (key, value){

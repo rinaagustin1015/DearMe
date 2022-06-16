@@ -23,8 +23,7 @@
             <?= $row['status']?>
         </td>
         <td>
-            <a href="todolistEdit.php?id=<?= $row['id']?>"><i class="bi bi-pencil-square" style="color: blue;"></i></a>                            
-            <!-- <button id="delete" name="delete" for="delete"><i class="bi bi-trash-fill" style="color: red" id="delete" name="delete" for="delete"></i></button> -->
+            <a href="todolistEdit.php?id=<?= $row['id']?>"><i class="bi bi-pencil-square" style="color: blue;"></i></a>          
             <a href="delete.php?action=deleteTodolist&id=<?= $row['id']?>"><i class="bi bi-trash-fill" style="color: red"></i></a>   
             <input type="hidden" id="id_delete" name="id_delete" for="id_delete" value="<?= $row['id']?>">
         </td>
