@@ -44,6 +44,15 @@
             </div>
       </div>      
     </div>
+    <div class="d-flex align-items-center p-3 my-3 text-dark rounded shadow-sm">
+        <div class="d-flex align-items-center">                
+          <select class="form-select" id="kategori" name="kategori" for="kategori">
+            <option value="0" selected>Status</option>
+            <option value="1">Belum</option>
+            <option value="2">Terpenuhi</option>
+          </select>
+        </div>
+    </div>   
 
     <div>        
     <div class="container">
@@ -91,7 +100,22 @@
     ObjAjax.open("get", "./searchWishlist.php?ngetik=" + ngetik.value, true);
     ObjAjax.send();
     });
-  </script>
 
+    var kategori = document.getElementById("kategori");
+    var data = document.getElementById("data");
+
+    kategori.addEventListener("click", function () {
+    var ObjAjax = new XMLHttpRequest();
+
+    ObjAjax.onreadystatechange = function () {
+        if (ObjAjax.readyState == 4 && ObjAjax.status == 200) {
+        data.innerHTML = ObjAjax.responseText;
+        }
+    };
+
+    ObjAjax.open("get", "./sortWishlist.php?kategori=" + kategori.value, true);
+    ObjAjax.send();
+    });
+  </script>
 </body>
 </html>

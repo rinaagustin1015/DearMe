@@ -119,8 +119,6 @@
                         $('#fupForm').find('input:text').val('');
                         $("#success").show();
                         $('#success').html('Diary Kamu Berhasil Ditambahkan! >.<');
-                        // alert("WISHLIST Kamu Berhasil Ditambahkan! >.<")
-                        // window.location = "wishlist.php"
                                 
                     }
                     else if(dataResult.statusCode==201){

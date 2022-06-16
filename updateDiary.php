@@ -23,7 +23,7 @@
 		break;
 
 		case 'updateWishlist':
-            $id_update=$_POST['id_update'];
+            $id_update =$_POST['id_update'];
 			$nama_item =$_POST['nama_item'];
 			$status =$_POST['status'];
 			$link_item =$_POST['link_item'];
@@ -31,17 +31,14 @@
 			$jumlah =$_POST['jumlah'];
 			$catatan =$_POST['catatan'];
 			$sql = "UPDATE wish_list SET 
-            nama_item='$nama_item',
-            link_item='$link_item',
-            catatan='$catatan',
-            harga='$harga',
-            jumlah='$jumlah',
-            status='$status' WHERE id='$id_update'";
+            nama_item ='$nama_item',
+            link_item ='$link_item',
+            catatan ='$catatan',
+            harga ='$harga',
+            jumlah ='$jumlah',
+            status ='$status' WHERE id='$id_update'";
 			if (mysqli_query($db, $sql)) {
-				echo ("<script LANGUAGE='JavaScript'>
-                        window.alert('WISHLIST kamu berhasil diedit >.<');
-                        window.location.href='wishlist.php';
-                        </script>");
+				echo json_encode(array("statusCode"=>200));
 			} 
 			else {
 				echo json_encode(array("statusCode"=>201));

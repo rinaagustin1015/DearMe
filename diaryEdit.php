@@ -121,10 +121,6 @@
           success: function(dataResult){
             var dataResult = JSON.parse(dataResult);
             if(dataResult.statusCode==200){
-              // $("#submit").removeAttr("disabled");
-              // $('#fupForm').find('input:text').val('');
-              // $("#success").show();
-              // $("#success").html('Diary Kamu Berhasil Diedit! >.<');
               alert("Diary Kamu Berhasil Diedit! >.<") 	
               window.location = "diary.php"						
             }

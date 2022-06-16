@@ -54,43 +54,17 @@
                 </div>
             </div>            
             <div class="my-3 p-3 bg-body rounded shadow-sm" id="diary">                
-                <h6 class="border-bottom pb-2 mb-0"><button class="btn bi bi-funnel-fill" id="byDate" name="byDate" for="byDate"></button> Catatan Tersimpan</h6>
+                <h6 class="border-bottom pb-2 mb-0"><button class="bi bi-funnel-fill" id="byDate" name="byDate" for="byDate"></button> Catatan Tersimpan</h6>
 
             <div class="" id = "data" name="data">
-            <?php
-                include "config.php";
-                $query = "SELECT * FROM diary ORDER BY tanggal DESC;";
-                $sql = $db->query($query);
-                $data = [];
-        
-                while ($row = $sql->fetch_assoc()):
-                ?>
-                <div class="d-flex text-muted pt-3">
-                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>            
-                    <p class="pb-3 text-dark small lh-sm border-bottom">                        
-                        <strong class="d-block text-gray-dark"><?= $row['tanggal']?></strong>                        
-                        <a href="diaryEdit.php?id=<?= $row['id_judul']?>" style="text-decoration:none; color:black;"><?= $row['judul']?></a>                                                         
-                    </p>                                    
-                </div>                                
-                <?php endwhile ; ?>
+            
             </div>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center mt-3">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-                </ul>
-            </nav>
+            <!-- <div class="text-center pt-3" style="float: right;"><a class="button" name="page" id="page">Sedikit</a></div> -->
+            <div class="text-center pt-3" style="float: right;"><a class="button" name="page" id="page">Lainnya</a></div>
         </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="offcanvas.js"></script>
     <script>
@@ -147,6 +121,26 @@
 
         ObjAjax.open("get", "./sortbyDate.php", true);
         ObjAjax.send();
+        });
+
+        var page = 0;  
+        $(document).ready(function () { 
+            $('#page').click(function () {
+                $.get("data.php?page=" + page + "&action=pageDiary", function (resp) {
+                    $.each(resp, function (key, value) {
+                        $("#data").append(
+                            "<div class='d-flex text-muted pt-3'>" +
+                            "<svg class='bd-placeholder-img flex-shrink-0 me-2 rounded' width='32' height='32' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 32x32' preserveAspectRatio='xMidYMid slice' focusable='false'><title>Placeholder</title><rect width='100%' height='100%' fill='#e83e8c'/><text x='50%' y='50%' fill='#e83e8c' dy='.3em'>32x32</text></svg>" +            
+                                "<p class='pb-3 text-dark small lh-sm border-bottom'>" +                        
+                                    "<strong class='d-block text-gray-dark'>" + value.tanggal + "</strong>" +                      
+                                    "<a style='text-decoration:none; color:black;' href='diaryEdit.php?id='" + value.id_judul + ">" + value.judul + "</a>" +                                                       
+                                "</p>" +                                    
+                            "</div>"
+                        );
+                    });
+                    page += 4;
+                });
+            }).trigger("click");
         });
     </script>
   </body>

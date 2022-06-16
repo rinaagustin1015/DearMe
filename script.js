@@ -1,6 +1,6 @@
 $(document).ready(function() {
 $('#submit').on('click', function() {
-$("#submit").attr("disabled", "disabled");
+// $("#butsave").attr("disabled", "disabled");
 var judul = $('#judul').val();
 var kategori_id = $('#kategori_id').val();
 var tanggal = $('#tanggal').val();

@@ -49,7 +49,7 @@
         <div class="bg-list shadow-lg rounded px-3">
             <div class="d-flex px-2 align-items-center">
                 <div class="col-12 mt-2">
-                    <a class="blog-header-logo fs-5" style="color: white;  text-decoration: none;">Daftar Pekerjaan :</a>
+                    <a class="blog-header-logo fs-5" style="color: white;  text-decoration: none;"><button class="btn bi bi-funnel-fill" style="color: black;" id="byDate" name="byDate" for="byDate"></button> Daftar Pekerjaan :</a>
                 </div>    
             </div>
             <div class="bg-light rounded mt-3 px-3">
@@ -114,6 +114,21 @@
         };
 
         ObjAjax.open("get", "./searchTodolist.php?ngetik=" + ngetik.value, true);
+        ObjAjax.send();
+        });
+
+        var data = document.getElementById("data");
+
+        byDate.addEventListener("click", function () {
+        var ObjAjax = new XMLHttpRequest();
+
+        ObjAjax.onreadystatechange = function () {
+            if (ObjAjax.readyState == 4 && ObjAjax.status == 200) {
+            data.innerHTML = ObjAjax.responseText;
+            }
+        };
+
+        ObjAjax.open("get", "./sortTodolist.php", true);
         ObjAjax.send();
         });
     </script>
